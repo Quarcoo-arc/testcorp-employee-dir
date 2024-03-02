@@ -2,6 +2,7 @@ package com.testCorp.employeeDir.rest;
 
 import com.testCorp.employeeDir.dao.EmployeeDAO;
 import com.testCorp.employeeDir.entity.Employee;
+import com.testCorp.employeeDir.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,14 +13,14 @@ import java.util.List;
 @RequestMapping("/api/employees")
 public class EmployeeRestController {
 
-    private final EmployeeDAO employeeDAO;
+    private final EmployeeService employeeService;
 
-    public EmployeeRestController(EmployeeDAO employeeDAO) {
-        this.employeeDAO = employeeDAO;
+    public EmployeeRestController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping("")
     public List<Employee> getAllEmployees() {
-        return employeeDAO.findAll();
+        return employeeService.findAll();
     }
 }
