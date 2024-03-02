@@ -17,4 +17,4 @@ spring.datasource.password=password
 
 - Run the project. You can use
   - `./mvnw` command in your terminal
-  - `run` button in your IDE after adding the springboot:run configuration
+  - `run` button in your IDE after adding the spring-boot:run configuration
