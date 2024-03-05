@@ -1,6 +1,5 @@
 package com.testCorp.employeeDir.rest;
 
-import com.testCorp.employeeDir.dao.EmployeeDAO;
 import com.testCorp.employeeDir.entity.Employee;
 import com.testCorp.employeeDir.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
