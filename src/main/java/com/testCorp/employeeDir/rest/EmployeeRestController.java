@@ -5,7 +5,7 @@ import com.testCorp.employeeDir.service.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -23,9 +23,9 @@ public class EmployeeRestController {
     }
 
     @GetMapping("/{employeeId}")
-    public Employee getEmployee(@PathVariable int employeeId) {
-        Employee employee = employeeService.findById(employeeId);
-        if(employee == null) {
+    public Optional<Employee> getEmployee(@PathVariable int employeeId) {
+        Optional<Employee> employee = employeeService.findById(employeeId);
+        if(employee.isEmpty()) {
             throw new RuntimeException("Employee with id="+ employeeId + " not found");
         }
         return employee;
@@ -41,8 +41,8 @@ public class EmployeeRestController {
         if(employee.getId() == 0){
             throw new Exception("Employee does not exist");
         }
-        Employee foundEmployee = employeeService.findById(employee.getId());
-        if(foundEmployee == null){
+        Optional<Employee> foundEmployee = employeeService.findById(employee.getId());
+        if(foundEmployee.isEmpty()){
             throw new Exception("Employee with id=" + employee.getId() + " does not exist");
         }
         return employeeService.save(employee);
@@ -50,8 +50,8 @@ public class EmployeeRestController {
 
     @DeleteMapping("/{employeeId}")
     public String deleteEmployee(@PathVariable Integer employeeId){
-        Employee employee = employeeService.findById(employeeId);
-        if(employee == null){
+        Optional<Employee> employee = employeeService.findById(employeeId);
+        if(employee.isEmpty()){
             throw new RuntimeException("Employee with id=" + employeeId + " does not exists");
         }
         employeeService.deleteById(employeeId);
